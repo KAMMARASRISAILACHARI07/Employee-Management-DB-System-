@@ -1,0 +1,39 @@
+--> Employees Management DataBase
+
+-- Create Departments table
+CREATE TABLE Departments (DepartmentID INT PRIMARY KEY,DepartmentName VARCHAR(50),ManagerID INT,Location VARCHAR(100));
+
+-- Inserting Departments
+INSERT INTO Departments (DepartmentID, DepartmentName, ManagerID, Location)
+VALUES (1, 'HR', 101, 'Headquarters'),
+(2, 'IT', 201, 'Tech Park'),
+(3, 'Finance', 301, 'Downtown');
+
+-- Create Employees table
+CREATE TABLE Employees (EmployeeID INT PRIMARY KEY,FirstName VARCHAR(50),LastName VARCHAR(50),DateOfBirth DATE,Gender CHAR(1),Position VARCHAR(50),DepartmentID INT,DateOfJoining DATE,FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID));
+
+-- Inserting Employees
+INSERT INTO Employees (EmployeeID, FirstName, LastName, DateOfBirth, Gender,
+Position, DepartmentID, DateOfJoining)
+VALUES (101, 'John', 'Doe', '1985-05-15', 'M', 'HR Manager', 1, '2010-01-15'),
+(102, 'Jane', 'Smith', '1990-08-22', 'F', 'Software Engineer', 2, '2015-03-10'),
+(103, 'Bob', 'Johnson', '1982-11-10', 'M', 'Accountant', 3, '2018-07-05');
+
+Select *from Employees;
+Select *from Departments;
+
+SELECT *FROM Employees WHERE DepartmentID = (SELECT DepartmentID FROM Departments WHERE DepartmentName = 'IT');
+
+UPDATE Employees SET Position = 'Senior HR Manager' WHERE EmployeeID = 101;
+
+DELETE FROM Employees WHERE EmployeeID = 102;
+
+SELECT D.DepartmentName, D.Location FROM Departments D JOIN Employees E ON D.DepartmentID = E.DepartmentID WHERE E.EmployeeID = 102;
+
+SELECT * FROM Employees WHERE DateOfJoining > '2015-01-01';
+
+SELECT * FROM Employees WHERE EmployeeID = 101;
+
+SELECT*from Employees WHERE EmployeeID=102;
+
+select*from Employees;
